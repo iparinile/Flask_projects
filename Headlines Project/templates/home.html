@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Заголовки новостей</title>
+</head>
+<body>
+    <h1>Новости</h1>
+    {% for article in articles %}
+        <b><a href="{{article.link}}">{{article.title}}</a></b><br/>
+        <i>{{article.published}}</i><br/>
+        <p>{{article.summary}}</p>
+        <hr/>
+    {% endfor %}
+</body>
+</html>
