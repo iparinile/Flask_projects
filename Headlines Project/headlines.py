@@ -8,25 +8,12 @@ from urllib.request import urlopen
 
 app = Flask(__name__)
 
-RSS_FEED = {'mail': 'https://news.mail.ru/rss/main/74/',
-            'rambler': 'https://news.rambler.ru/rss/Cheliabinsk/'}
+RSS_FEEDS = {'mail': 'https://news.mail.ru/rss/main/74/',
+             'rambler': 'https://news.rambler.ru/rss/Cheliabinsk/'}
 
+WEATHER_URL = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&lang=ru&appid=3672b074c7480ad9255662ebe5441a3f'
 
-def get_weather(query):
-    api_url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&lang=ru&appid=3672b074c7480ad9255662ebe5441a3f'
-    query = urllib.parse.quote(query)
-    url = api_url.format(query)
-    data = urlopen(url).read()
-    parsed = json.loads(data)
-    weather = None
-    if parsed.get("weather"):
-        weather = {"description": parsed["weather"][0]["description"], "temperature": parsed["main"]["temp"],
-                   "city": parsed["name"]
-                   }
-    return weather
-
-
-DEFAULTS = {'publication': 'bbc', 'city': 'London,UK'}
+DEFAULTS = {'publication': 'mail', 'city': 'London,UK'}
 
 
 @app.route("/")
@@ -54,9 +41,9 @@ def get_news(query):
 
 
 def get_weather(query):
-    query = urllib.quote(query)
+    query = urllib.parse.quote(query)
     url = WEATHER_URL.format(query)
-    data = urllib2.urlopen(url).read()
+    data = urlopen(url).read()
     parsed = json.loads(data)
     weather = None
     if parsed.get('weather'):
