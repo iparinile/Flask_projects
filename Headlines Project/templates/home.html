@@ -6,6 +6,18 @@
 </head>
 <body>
     <h1>Новости</h1>
+    <h2>Текущая погода</h2>
+    <form>
+        <input type="text" name="city" placeholder="Поиск погоды">
+        <input type="submit" value="Тык!">
+    </form>
+    <p>Город: <b>{{weather.city}}</b></p>
+    <p>{{weather.description}} |{{weather.temperature}}&#8451;</p>
+    <h2>Новости</h2>
+    <form>
+        <input type="text" name="publication" placeholder="Поиск" />
+        <input type="submit" value="Тык!" />
+    </form>
     {% for article in articles %}
         <b><a href="{{article.link}}">{{article.title}}</a></b><br/>
         <i>{{article.published}}</i><br/>
