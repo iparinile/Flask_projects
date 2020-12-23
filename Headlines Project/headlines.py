@@ -24,7 +24,7 @@ def get_rate(frm, to):
     return to_rate / frm_rate, parsed.keys()
 
 
-DEFAULTS = {'publication': 'mail', 'city': 'London,UK', 'currency_from': 'GBP', 'currency_to': 'USD'}
+DEFAULTS = {'publication': 'mail', 'city': 'Челябинск,Ru', 'currency_from': 'USD', 'currency_to': 'RUB'}
 
 
 @app.route("/")
@@ -34,11 +34,13 @@ def home():
     if not publication:
         publication = DEFAULTS['publication']
     articles = get_news(publication)
+
     # get customized weather based on user input or default
     city = request.args.get('city')
     if not city:
         city = DEFAULTS['city']
     weather = get_weather(city)
+
     # get customized currency based on user input or default
     currency_from = request.args.get("currency_from")
     if not currency_from:
