@@ -11,8 +11,27 @@
         <input type="text" name="city" placeholder="Поиск погоды">
         <input type="submit" value="Тык!">
     </form>
-    <p>Город: <b>{{weather.city}}</b></p>
+    <p>Город: <b>{{weather.city}}, {{weather.country}}</b></p>
     <p>{{weather.description}} |{{weather.temperature}}&#8451;</p>
+    <h2>Курс валют</h2>
+    <form>
+        Из: <select name="currency_from">
+            {%  for currency in currencies %}
+                <option value="{{ currency }}" {{'selected="selected"' if currency_from==currency}}>
+                    {{ currency }}
+                </option>
+            {% endfor %}
+        </select>
+        в: <select name="currency_to">
+            {%  for currency in currencies %}
+                <option value="{{ currency }}" {{'selected="selected"' if currency_to==currency}}>
+                    {{ currency }}
+                </option>
+            {% endfor %}
+        </select>
+            <input type="submit" value="Тык!">
+    </form>
+    1 {{currency_from}} = {{currency_to}} {{rate}}
     <h2>Новости</h2>
     <form>
         <input type="text" name="publication" placeholder="Поиск" />
